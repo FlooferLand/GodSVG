@@ -128,16 +128,17 @@ func _on_slider_gui_input(event: InputEvent) -> void:
 			slider_dragged = true
 			initial_slider_value = element.get_attribute_value(attribute_name)
 			set_num(get_slider_value_at_y(event.position.y))
-		accept_event()
+			accept_event()
 	else:
 		if Utils.is_event_drag(event):
 			set_num(get_slider_value_at_y(event.position.y))
+			accept_event()
 		elif Utils.is_event_drag_end(event):
 			slider_dragged = false
 			var final_slider_value := get_slider_value_at_y(event.position.y)
 			if initial_slider_value != element.get_attribute(attribute_name).num_to_text(final_slider_value):
 				set_num(final_slider_value, true)
-		accept_event()
+			accept_event()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if slider_dragged and Utils.is_event_drag_cancel(event):
